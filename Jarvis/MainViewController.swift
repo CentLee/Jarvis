@@ -31,7 +31,6 @@ class MainViewController: UIViewController, UIPopoverPresentationControllerDeleg
         if (sender.direction == .left) {
             pageCount = pageCount + 1
             Search(pageCount)
-//            pageControlpageCount - 1
             pageControl.setCurrentPage(at: pageCount - 1)
         }
         if (sender.direction == .right) {
@@ -108,7 +107,6 @@ class MainViewController: UIViewController, UIPopoverPresentationControllerDeleg
         let url = URL(string: strFo!)
         Alamofire.request(url!, method: .get, headers: headers).responseJSON { (reponsedata) -> Void in
             if ((reponsedata.result.value) != nil) {
-                print("parsing Success")
                 let swiftyJsonVar = JSON(reponsedata.result.value!)
                 if let resdata = swiftyJsonVar["items"].arrayObject {
                     self.Books = resdata as! [[String : String]]

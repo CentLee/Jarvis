@@ -50,7 +50,6 @@ class SearchNewsViewController: UIViewController, SFSpeechRecognizerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //search.isEnabled = false
         speechRecognizer?.delegate = self
         UINavigationBar.appearance().tintColor = UIColor.black
         SFSpeechRecognizer.requestAuthorization { (authStatus) in  //4
@@ -214,9 +213,7 @@ class SearchNewsViewController: UIViewController, SFSpeechRecognizerDelegate, UI
         let url = URL(string: strFo!)
         Alamofire.request(url!, method: .get, headers: headers).responseJSON { (reponsedata) -> Void in
             if ((reponsedata.result.value) != nil) {
-                print("parsing Success")
                 let swiftyJsonVar = JSON(reponsedata.result.value!)
-                print(swiftyJsonVar)
                 if let resdata = swiftyJsonVar["items"].arrayObject {
                     self.Books = resdata as! [[String : String]]
                 }

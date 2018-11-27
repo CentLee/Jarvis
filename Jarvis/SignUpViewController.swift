@@ -111,7 +111,6 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         })
     }
     @objc func Signup(sender : UIButton!) {
-//        var bool : Bool = false
         if EmailText.text != "" && PasswordText.text != "" && yearText.text != "" && NicknameText.text != "" && twicePass.text != "" { // 전부 다 공백이 아니면
             if (twicePass.text?.count)! == 4 { // 공백 아닌 상태에서 네자리가 맞다.? 그럼 닉네임 중복검사
                 Create()

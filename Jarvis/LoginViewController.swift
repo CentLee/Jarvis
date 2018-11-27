@@ -38,7 +38,6 @@ class LoginViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopov
     override func viewWillAppear(_ animated: Bool) {
         if (Auth.auth().currentUser) != nil {
             performSegue(withIdentifier: "Login", sender: self)
-            //ㅇㅈ븡쟁ㅂ장ㅈㅂ앚ㅂ
         }
     }
     override func viewDidLoad() {

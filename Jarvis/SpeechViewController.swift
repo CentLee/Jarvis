@@ -261,7 +261,6 @@ class SpeechViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopo
         handle = ref?.child("User").child((Auth.auth().currentUser?.uid)!).child("UserProfile").observe(.value, with: { (snapshot) in
             if let item = snapshot.value as? [String : String] {
                 for gene in self.pickOption {
-                    print(gene)
                     if item["generation"] == gene { //20대
                         self.PlusCount(item["generation"]!)
                     }
@@ -271,7 +270,6 @@ class SpeechViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopo
     }
     @objc func PlusCount(_ gene : String) { //해당 연배에 키워드 카운트 증가 함수
         for key in KeyListDic {
-            print(key)
             if self.textItem! == key { // 불렀던값이 같을경우 그 세대 값에 넣는다.
                 handle = ref?.child("Generation").child(gene).child(self.textItem!).observe(.childAdded, with: { (snapshot) in
                     if let item = snapshot.value as? String { // 그 해당 세대의 해당 키워드로 들어가서 카운트 증가시키고 다시 저장
@@ -317,7 +315,6 @@ class SpeechViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopo
 
         
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: {(result, error)in
-            //print("======================================================\nComplete recognitionTask!!!\n======================================================")
             var isFinal = false
             if result != nil{
                 self.textItem = result?.bestTranscription.formattedString
@@ -325,7 +322,6 @@ class SpeechViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopo
                 if recognitionRequest.shouldReportPartialResults == true {
                     recognitionRequest.shouldReportPartialResults = false
                    let bool = self.loop(self.textItem!)
-                    print(bool)
                     if bool { // 같은 키워드를 찾았을시에
                         self.CheckGene()
                         self.label.text = self.textItem

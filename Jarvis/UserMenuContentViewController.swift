@@ -49,7 +49,6 @@ class UserMenuContentViewController: UIViewController, UITableViewDelegate, UITa
                 self.array.append(KeyWordList(name : i, count : Int(item)!))
                 if i == KeyList[KeyList.count - 1] { //마지막 인덱스에 다 다랐을 때 즉, 딕셔너리 완성 시
                     self.KeyResult = self.SortKeyValue(self.array, self.KeyListDic)
-                    print(self.KeyResult)
                     self.myKeyword.reloadData() //저장한 다음 테이블 뷰에 올린다.
                 }
             })
