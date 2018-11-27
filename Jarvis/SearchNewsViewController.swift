@@ -12,7 +12,7 @@ import SwiftyJSON
 import Alamofire
 
 class SearchNewsViewController: UIViewController, SFSpeechRecognizerDelegate, UITableViewDelegate, UITableViewDataSource {// 파싱된 뉴스 보는 뷰
-    @objc let headers =  ["X-Naver-Client-Id" : "jhTqCNNdUtuebI3LyVmL", "X-Naver-Client-Secret" : "PBTEyPTMMh"]
+    var headers = [String:String]() //["X-Naver-Client-Id" : "jhTqCNNdUtuebI3LyVmL", "X-Naver-Client-Secret" : "PBTEyPTMMh"]
     @objc var Books : [[String : String]] = []
     @objc let display = 10
     @objc var currentPage = 1
@@ -211,6 +211,11 @@ class SearchNewsViewController: UIViewController, SFSpeechRecognizerDelegate, UI
         let str = "https://openapi.naver.com/v1/search/news.json?query=4차 산업혁명 \(query)&display=\(display)&start=\(currentPage)&sort=sim"
         let strFo = str.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let url = URL(string: strFo!)
+        if let infoDic : [String : Any] = Bundle.main.infoDictionary {
+            if let id = infoDic["secretId"] as? String, let secret = infoDic["secret"] as? String {
+                headers = ["X-Naver-Client-Id" : id, "X-Naver-Client-Secret" : secret]
+            }
+        }
         Alamofire.request(url!, method: .get, headers: headers).responseJSON { (reponsedata) -> Void in
             if ((reponsedata.result.value) != nil) {
                 let swiftyJsonVar = JSON(reponsedata.result.value!)
