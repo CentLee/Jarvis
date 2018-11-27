@@ -282,7 +282,7 @@ class SpeechViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopo
             }
         }
     }
-    @objc func startRecording() { //인식
+    @objc func startRecording() { // 음성 인식을 통해서 설정된 키워드에 맞는 단어를 인식할 시 그에 맞는 뉴스를 파싱해서 뉴스 뷰로 전환시켜줌
         if recognitionTask != nil{
             recognitionTask?.cancel()
             recognitionTask = nil
@@ -330,6 +330,7 @@ class SpeechViewController: UIViewController, SFSpeechRecognizerDelegate, UIPopo
                     }
                     else if bool == false {
                         self.label.text = self.speaktext
+                        self.textItem = "" //다른 키워드를 말해서 다시 말해야할 땐 초기화.
                         return
                     }
                 }
